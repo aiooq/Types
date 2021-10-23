@@ -41,7 +41,10 @@ def main(tuple):
                 print("Некорректное значение, ожидается число, пожалуйста повторите ввод!")
             elif e.args[0]=="StrFormatIsNotValid":
                 i-=1
-                print("Некорректный формат, пожалуйста смотрите пример и повторите ввод!") 
+                print("Некорректный формат, пожалуйста смотрите пример и повторите ввод!")
+            elif e.args[0]=="ValueOutOfRange":
+                i-=1
+                print("Значение вне диапазона, пожалуйста повторите ввод!")                 
             else:
                 print("Ошибка в конфигурации: "+e)               
             continue
@@ -75,13 +78,56 @@ def ForTask1(value, out):
 
     return None
 
+def ForTask2(value, out):
+    try:
+        values=eval(value)
+        for i in range(1,len(values),2):
+            value=values[i]
+            last=i-1
+            values[i]=values[last]
+            values[last]=value
+    except:
+        raise Exception("StrFormatIsNotValid")
+
+    return out.format(values)
+
+def ForTask3(value, out):
+    if value<0 or value>12:
+        raise Exception("ValueOutOfRange")
+
+    # Реализация через list
+    '''values = ["зима","весна","лето","осень"]
+    if (value>=1 and value<=2) or value==12:
+        return out.format(values[0])
+    elif value>=3 and value<=5:
+        return out.format(values[1])
+    elif value>=6 and value<=8:
+        return out.format(values[2])
+    elif value>=9 and value<=11:
+        return out.format(values[3])
+    else:
+        raise Exception("StrFormatIsNotValid")'''
+
+    # Реализация через dict, для экономии ресурсов нужно объявлять на глобальном уровне
+    values = dict()
+    values[12]="зима"
+    for i in range(1,3):
+        values[i]="зима"
+    for i in range(3,6):
+        values[i]="весна"
+    for i in range(6,9):
+        values[i]="лето"
+    for i in range(9,12):
+        values[i]="осень"
+    return out.format(values[value])        
+
 def ForTask5(value, out):
-    if(value<0):
+    if value<0:
         raise Exception("PositiveNumber")
     my_list = [7, 5, 3, 3, 2]
     my_list.append(value)
     my_list.sort(reverse=True)
-    return out.format(my_list)
+    return out.format(my_list)    
 
 # Конфигурируем программу добавляя задачи в список
 # В каждой задаче настраиваем ввод, вывод, исполняющую функцию и тип ожидаемых данных от пользователя
@@ -89,8 +135,12 @@ def ForTask5(value, out):
 # Если необходимо, то список можно сортировать, так как номера задач весьма условны
 # Сортировка внутри кортежа (одной задачи), недопустима!
 tasks = list()
-tasks.append(({"def":ForTask1}))
+#tasks.append(({"def":ForTask1}))
+#tasks.append(({"in":"Введите список, например: [1,2,4,6,3] : ", "out":"Результат = {0}", "def":ForTask2, "type": str}))
+tasks.append(({"in":"Введите номер месяца: ", "out":"Время года = {0}", "def":ForTask3, "type": int}))
+
 #tasks.append(({"in":"Введите натуральное число (новый элемент рейтинга): ", "out":"Результат = {0}", "def":ForTask5, "type": int}))
+
 
 # Основной цикл
 while True:
