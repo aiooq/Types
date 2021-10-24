@@ -121,6 +121,17 @@ def ForTask3(value, out):
         values[i]="осень"
     return out.format(values[value])        
 
+def ForTask4(value, out):
+    values=value.split(" ")
+    i=1
+    for word in values:
+        if word=="":
+            continue
+        print("#{0} {1}".format(i,word[0:10]))
+        i+=1
+
+    return None
+
 def ForTask5(value, out):
     if value<0:
         raise Exception("PositiveNumber")
@@ -137,8 +148,8 @@ def ForTask5(value, out):
 tasks = list()
 #tasks.append(({"def":ForTask1}))
 #tasks.append(({"in":"Введите список, например: [1,2,4,6,3] : ", "out":"Результат = {0}", "def":ForTask2, "type": str}))
-tasks.append(({"in":"Введите номер месяца: ", "out":"Время года = {0}", "def":ForTask3, "type": int}))
-
+#tasks.append(({"in":"Введите номер месяца: ", "out":"Время года = {0}", "def":ForTask3, "type": int}))
+tasks.append(({"in":"Введите несколько слов: ", "def":ForTask4, "type": str}))
 #tasks.append(({"in":"Введите натуральное число (новый элемент рейтинга): ", "out":"Результат = {0}", "def":ForTask5, "type": int}))
 
 
