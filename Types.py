@@ -34,8 +34,7 @@ def main(tuple):
                             elif item == int:
                                 if not value.isnumeric():
                                     continue
-                            else:
-                                value=item(value)
+                            value=item(value)
                             result = True
                             break
                         except:
@@ -218,7 +217,7 @@ task_6=(
     ({"out":"Добавление товара в программу..."}),
     ({"in":"Введите название: ", "def":ForTask6_1, "type": str}),
     ({"in":"Введите цену: ", "def":ForTask6_2, "type": {int,float}}),
-    ({"in":"Введите количество:", "def":ForTask6_3, "type": {int,float}}),
+    ({"in":"Введите количество: ", "def":ForTask6_3, "type": {int,float}}),
     ({"in":"Введите eдицину измерения: ", "out":"Товар добавлен: {0}", "def":ForTask6_4, "type": str}),
     ({"in":"Введите 'yes' или 'y', чтобы продолжить добавление товаров, а для аналитики нажмите Enter: ", "def":ForTask6_5, "type": str}))
 tasks.append(task_6)    
